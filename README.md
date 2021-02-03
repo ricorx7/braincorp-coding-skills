@@ -18,15 +18,18 @@ If you want to adjust the initial matrices used for calculations, there are 8 op
 
 ## Application Parameters
 8 Arguments that are optional:
-[M1_Rows] [M1_Columns] [M2_Rows] [M2_Columns] [NumThreads] [M1_StartValue] [M2_StartValue]
 
-:param M1_Rows: Number of rows in matrix 1. [DEFAULT: 2]
-:param M1_Columns: Number of columns in matrix 1. [DEFAULT: 3]
-:param M2_Rows: Number of rows in matrix 2. [DEFAULT: 3]
-:param M2_Columns: Number of columns in matrix 2.  [DEFAULT: 2]
-:param NumThreads: Number threads to utilize.  [DEFAULT: 2]
-:param M1_StartValue: The first value in matrix 1.  The values are incremented in the matrix. [DEFAULT: 0]
-:param M2_StartValue: The first value in matrix 2.  The values are incremented in the matrix. [DEFAULT: 5]
+`[M1_Rows] [M1_Columns] [M2_Rows] [M2_Columns] [NumThreads] [M1_StartValue] [M2_StartValue]`
+
+```
+M1_Rows: Number of rows in matrix 1. [DEFAULT: 2]
+M1_Columns: Number of columns in matrix 1. [DEFAULT: 3]
+M2_Rows: Number of rows in matrix 2. [DEFAULT: 3]
+M2_Columns: Number of columns in matrix 2.  [DEFAULT: 2]
+NumThreads: Number threads to utilize.  [DEFAULT: 2]
+M1_StartValue: The first value in matrix 1.  The values are incremented in the matrix. [DEFAULT: 0]
+M2_StartValue: The first value in matrix 2.  The values are incremented in the matrix. [DEFAULT: 5]
+```
 
 ### Example Using Parameters
 ```bash
