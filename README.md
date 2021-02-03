@@ -8,8 +8,11 @@ Code can be found here:
 
 # Compile
 ```bash
-g++ -g main.cpp -o main.out -std=c++11 -lpthread
+g++ main.cpp -o main.out -std=c++11 -lpthread
 ```
+
+If debugging code with GDB, include the -g.
+
 
 # Run Test Application
 ```bash
