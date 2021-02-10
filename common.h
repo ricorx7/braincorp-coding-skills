@@ -87,10 +87,12 @@ class MatrixCommon {
             {
                 // Delete each row
                 delete [] matrix[m];
+                matrix[m] = nullptr;
             }
 
             // Delete the entire matrix
             delete [] matrix;
+            matrix = nullptr;
         }
 
         /**

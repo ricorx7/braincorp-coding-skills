@@ -115,7 +115,7 @@ int main(int argc, char** argv)
     cout << "Matrix Multiplication" << endl;
     cout << "---------------------------" << endl;
 
-    MatrixAlgbra ma;
+    MatrixAlgebra ma;
     MatrixCommon mc;
 
     // Create the initial thread
