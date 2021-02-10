@@ -1,4 +1,5 @@
 #include "matrix.h"
+#include "matrix_unittest.h"
 
 /**
  * Test Matrix Multiplication and Matrix Transpose.
@@ -36,8 +37,8 @@ int main(int argc, char** argv)
     int iM2Columns = 2;       // DEFAULT Number of columns (Width/columns)
 
     int iNumThreads = 2;      // DEFAULT Number of threads to utilize threads efficiently
-    int iM1StartValue = 0;    // DEFAULT Start value in the matrix 1.
-    int iM2StartValue = 5;    // DEFAULT start value for matrix 2
+    double iM1StartValue = 0;    // DEFAULT Start value in the matrix 1.
+    double iM2StartValue = 5;    // DEFAULT start value for matrix 2
 
     // Handle any arguments
     if(argc >= 5)
@@ -59,13 +60,13 @@ int main(int argc, char** argv)
             // Check if M1 start value is given
             if(argc >= 7)
             {
-                iM1StartValue = stoi(argv[6]);
+                iM1StartValue = stod(argv[6]);
             }
 
             // Check if M2 start value is given
             if(argc >= 8)
             {
-                iM2StartValue = stoi(argv[7]);
+                iM2StartValue = stod(argv[7]);
             }
         }
         catch(exception &ex)
@@ -113,21 +114,25 @@ int main(int argc, char** argv)
     cout << "---------------------------" << endl;
     cout << "Matrix Multiplication" << endl;
     cout << "---------------------------" << endl;
+
+    MatrixAlgbra ma;
+    MatrixCommon mc;
+
     // Create the initial thread
-    int** matrix1 = create2DMatrix(iM1Rows, iM1Columns, iM1StartValue);
-    int** matrix2 = create2DMatrix(iM2Rows, iM2Columns, iM2StartValue);
+    double** matrix1 = mc.create2DMatrix(iM1Rows, iM1Columns, iM1StartValue);
+    double** matrix2 = mc.create2DMatrix(iM2Rows, iM2Columns, iM2StartValue);
 
     cout << "Original Matrices: " << endl;
-    print2DMatrix(matrix1, iM1Rows, iM1Columns, bPrintMatrix);
+    mc.print2DMatrix(matrix1, iM1Rows, iM1Columns, bPrintMatrix);
     cout << endl;
-    print2DMatrix(matrix2, iM2Rows, iM2Columns, bPrintMatrix);
+    mc.print2DMatrix(matrix2, iM2Rows, iM2Columns, bPrintMatrix);
     cout << endl;
 
     // Matrix Multiply
     cout << "Result: " << endl;
-    int** resultT = matrixMultiply(matrix1, matrix2, iM1Rows, iM1Columns, iM2Columns, iNumThreads);
-    print2DMatrix(resultT, iM1Rows, iM2Columns, bPrintMatrix);
-    clean2DMatrix(resultT, iM1Rows);
+    double** resultT = ma.matrixMultiply(matrix1, matrix2, iM1Rows, iM1Columns, iM2Columns, iNumThreads);
+    mc.print2DMatrix(resultT, iM1Rows, iM2Columns, bPrintMatrix);
+    mc.clean2DMatrix(resultT, iM1Rows);
 
     /******************************************************/
 
@@ -140,16 +145,19 @@ int main(int argc, char** argv)
     cout << "---------------------------" << endl;
     // Create the initial matrix
     cout << "Original Matrix: " << endl;
-    print2DMatrix(matrix1, iM1Rows, iM1Columns, bPrintMatrix);
+    mc.print2DMatrix(matrix1, iM1Rows, iM1Columns, bPrintMatrix);
 
     cout << endl;
 
     // Transpose the matrix
     cout << "Result: " << endl;
-    int** matrixT = transpose(matrix1, iM1Rows, iM1Columns, iNumThreads);
-    print2DMatrix(matrixT, iM1Columns, iM1Rows, bPrintMatrix);
-    clean2DMatrix(matrixT, iM1Columns);
+    double** matrixT = ma.transpose(matrix1, iM1Rows, iM1Columns, iNumThreads);
+    mc.print2DMatrix(matrixT, iM1Columns, iM1Rows, bPrintMatrix);
+    mc.clean2DMatrix(matrixT, iM1Columns);
 
-    clean2DMatrix(matrix1, iM1Rows);
-    clean2DMatrix(matrix2, iM2Rows);
+    mc.clean2DMatrix(matrix1, iM1Rows);
+    mc.clean2DMatrix(matrix2, iM2Rows);
+
+    TestMatrix tm;
+    tm.test_all();
 }
