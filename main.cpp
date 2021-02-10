@@ -158,6 +158,11 @@ int main(int argc, char** argv)
     mc.clean2DMatrix(matrix1, iM1Rows);
     mc.clean2DMatrix(matrix2, iM2Rows);
 
+
+    cout << endl;
+    cout << "---------------------------" << endl;
+    cout << "Unit Testing" << endl;
+    cout << "---------------------------" << endl;
     TestMatrix tm;
     tm.test_all();
 }

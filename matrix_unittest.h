@@ -23,7 +23,7 @@ class TestMatrix {
 
             mc.clean2DMatrix(test1M, 2);
 
-            cout << "Test Matrix Create PASS" << endl;
+            cout << "PASS - Test Matrix Create PASS" << endl;
         }
 
         void test_matrix_create_empty() 
@@ -38,7 +38,28 @@ class TestMatrix {
 
             mc.clean2DMatrix(test1M, 2);
 
-            cout << "Test Matrix Creation Empty PASS" << endl;
+            cout << "PASS - Test Matrix Creation Empty PASS" << endl;
+        }
+
+        void test_matrix_clean() 
+        {
+            MatrixCommon mc;
+            double** test1M = mc.create2DMatrix(2, 2, 2.0);
+
+            assert(test1M[0][0] == 2.0);
+            assert(test1M[0][1] == 3.0);
+            assert(test1M[1][0] == 4.0);
+            assert(test1M[1][1] == 5.0);
+
+            mc.clean2DMatrix(test1M, 2);
+
+
+            assert(test1M[0][0] != 2.0);
+            assert(test1M[0][1] != 3.0);
+            assert(test1M[1][0] != 4.0);
+            assert(test1M[1][1] != 5.0);
+
+            cout << "PASS - Test Matrix Clean PASS" << endl;
         }
 
         void test_transpose() 
@@ -66,7 +87,25 @@ class TestMatrix {
             mc.clean2DMatrix(test1M, 2);
             mc.clean2DMatrix(result, 2);
 
-            cout << "Test Matrix Transpose PASS" << endl;
+            cout << "PASS - Test Matrix Transpose" << endl;
+        }
+
+        void test_transpose_1() 
+        {
+            MatrixCommon mc;
+            double** test1M = mc.create2DMatrix(1, 1, 2.0);
+
+            assert(test1M[0][0] == 2.0);
+
+            MatrixAlgebra ma;
+            double** result = ma.transpose(test1M, 1, 1, 1);
+
+            assert(result[0][0] == 2.0);
+
+            mc.clean2DMatrix(test1M, 1);
+            mc.clean2DMatrix(result, 1);
+
+            cout << "PASS - Test Matrix Transpose 1 Element" << endl;
         }
 
         void test_matrix_multiply() 
@@ -102,13 +141,36 @@ class TestMatrix {
             assert(fabs(result[2][1] - 56.695) < 0.01f);
             assert(fabs(result[2][2] - 69.995) < 0.01f);
 
-            mc.clean2DMatrix(test1M, 2);
-            mc.clean2DMatrix(test2M, 2);
-            mc.clean2DMatrix(result, 2);
+            mc.clean2DMatrix(test1M, 3);
+            mc.clean2DMatrix(test2M, 3);
+            mc.clean2DMatrix(result, 3);
 
-            cout << "Test Matrix Multiply PASS" << endl;
+            cout << "PASS - Test Matrix Multiply" << endl;
         }
 
+
+        void test_matrix_multiply_1() 
+        {
+            MatrixCommon mc;
+            double** test1M = mc.create2DMatrix(1, 1, 2.0);
+
+            assert(test1M[0][0] == 2.0);
+
+            double** test2M = mc.create2DMatrix(1, 1, 3.0);
+
+            assert(test2M[0][0] == 3.0);
+
+            MatrixAlgebra ma;
+            double** result = ma.matrixMultiply(test1M, test2M, 1, 1, 1, 1);
+
+            assert(fabs(result[0][0] - 6.0) < 0.01f);
+
+            mc.clean2DMatrix(test1M, 1);
+            mc.clean2DMatrix(test2M, 1);
+            mc.clean2DMatrix(result, 1);
+
+            cout << "PASS - Test Matrix Multiply 1 Element" << endl;
+        }
 
 
         void test_all()
@@ -116,6 +178,9 @@ class TestMatrix {
             test_matrix_create();
             test_matrix_create_empty();
             test_transpose();
+            test_transpose_1();
             test_matrix_multiply();
+            test_matrix_multiply_1();
+            test_matrix_clean();
         }
 };
